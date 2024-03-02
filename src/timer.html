@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            background-color: black;
+            color: #e3a194;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="timeLabel" style="font-size: 18px;"></div>
+
+<script>
+    const MAX_SECONDS = 2680560000;
+
+    function timeDifferenceInSeconds(date1, date2) {
+        const datetime1 = new Date(date1);
+        const datetime2 = new Date(date2);
+
+        const timeDifference = Math.abs((datetime1 - datetime2) / 1000);
+
+        return timeDifference;
+    }
+
+    function update() {
+        const now = new Date();
+        const currentDate = now.toISOString().split('T')[0];
+        const currentTime = now.toTimeString().split(' ')[0];
+
+        const differenceSeconds = timeDifferenceInSeconds('2003-01-14', currentDate);
+
+        const remainingSeconds = MAX_SECONDS - now.getSeconds() - differenceSeconds;
+
+        const countdownString = `Countdown: ${Math.floor(remainingSeconds)} seconds`;
+        document.getElementById('timeLabel').textContent = countdownString;
+
+        setTimeout(update, 1000);
+    }
+
+    update();
+</script>
+
+</body>
+</html>
